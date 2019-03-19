@@ -8,6 +8,8 @@
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -24,8 +26,6 @@
 			<div class="form-group">
 				<label>First Name: </label> <input type="text" class="form-control" th:field="*{firstName}" placeholder="Enter First Name"/>
 			</div>
-			
-			  
 			<div class="form-group">
 				<label>Last Name: </label> <input type="text" class="form-control" th:field="*{lastName}" placeholder="Enter Last Name"/>
 			</div>
@@ -38,10 +38,31 @@
 			<div class="form-group">
 				<label>Address: </label> <input type="text" class="form-control" th:field="*{address}" placeholder="Enter Address"/>
 			</div>
-			
+			<div class="form-group">
+				<label>Registration Number: </label> <input type="text" class="form-control" th:field="*{registrationNumber}" placeholder="Enter Registration Number"/>
+			</div>
+			 
+			<div class="form-group" >
+				<label>Date Of Birth: </label> <input type="date" class="form-control" th:field="*{dob}" placeholder="Enter Date of Birth"/>
+			</div>		
+			<div class="form-group">
+				<label>Entry Date: </label> <input type="date" class="form-control" th:field="*{entryDate}" placeholder="Enter Entry Date"/>
+			</div>
+
+			<div class="form-group">
+			 	<label>Track: </label>
+				<label class="radio-inline">
+				  <label><input type="radio" name="rdoTrack" checked="true" th:field="*{track}" value="FPP"  >FPP</label>
+				</label>
+				<label class="radio-inline">
+				  <label><input type="radio" name="rdoTrack" th:field="*{track}" value="MPP">MPP</label>
+				</label>
+			</div> 
+			 
+			 
 			<div class="pull-right">
 				<a href="/student" class="btn btn-default">Cancel</a>
-				<button type="submit" class="btn btn-primary" >Save Student</button>
+				<button type="submit" class="btn btn-primary" >Save</button>
 			</div>
 			 
 		</form>

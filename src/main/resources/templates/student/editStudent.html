@@ -17,11 +17,11 @@
 
 	<div class="container" layout:fragment="content">
 		<div class="alert alert-info">
-			<h2>Create Student</h2><hr>
+			<h2>Edit Student</h2><hr>
 			<a class="btn btn-primary" href="/">Return Home</a>
 		</div>
 
-		<form action="/student/save" th:object="${newStudent}" method="post">
+		<form action="#" th:action="@{/student/edit/save}" th:object="${student}" method="post">
 			
 			<div class="form-group">
 				<label>First Name: </label> <input type="text" class="form-control" th:field="*{firstName}" placeholder="Enter First Name"/>
@@ -41,8 +41,9 @@
 			<div class="form-group">
 				<label>Registration Number: </label> <input type="text" class="form-control" th:field="*{registrationNumber}" placeholder="Enter Registration Number"/>
 			</div>
+			
 			 
-			<div class="form-group" >
+			<div class="form-group">
 				<label>Date Of Birth: </label> <input type="date" class="form-control" th:field="*{dob}" placeholder="Enter Date of Birth"/>
 			</div>		
 			<div class="form-group">
@@ -63,6 +64,7 @@
 			<div class="pull-right">
 				<a href="/student" class="btn btn-default">Cancel</a>
 				<button type="submit" class="btn btn-primary" >Save</button>
+				<input type="hidden" th:field="*{id}"/>
 			</div>
 			 
 		</form>
