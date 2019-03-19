@@ -30,6 +30,15 @@
 				<label>Last Name: </label> <input type="text" class="form-control" th:field="*{lastName}" placeholder="Enter Last Name"/>
 			</div>
 			<div class="form-group">
+			 	<label>Gender: </label>
+				<label class="radio-inline">
+				  <label><input type="radio" name="rdoGender" checked="true" th:field="*{gender}" value="MALE"  >MALE</label>
+				</label>
+				<label class="radio-inline">
+				  <label><input type="radio" name="rdoGender" th:field="*{gender}" value="FEMALE">FEMALE</label>
+				</label>
+			</div> 
+			<div class="form-group">
 				<label>Email: </label> <input type="text" class="form-control" th:field="*{email}" placeholder="Enter Email"/>
 			</div>
 			<div class="form-group">
@@ -58,8 +67,16 @@
 				  <label><input type="radio" name="rdoTrack" th:field="*{track}" value="MPP">MPP</label>
 				</label>
 			</div> 
-			 
-			 
+			
+			<div class="form-group">
+				<label>Advisor: </label>
+			   <select class="form-control" th:field="*{faculty.id}"  id="dropFaculty">
+			    <option value="0">select faculty</option>
+			    <option th:each="faculty : ${facultyList}" th:value="${faculty.id}" th:text="${faculty.firstName}"></option>
+			    </select>	    
+			</div>
+			
+			  
 			<div class="pull-right">
 				<a href="/student" class="btn btn-default">Cancel</a>
 				<button type="submit" class="btn btn-primary" >Save</button>

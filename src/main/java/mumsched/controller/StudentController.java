@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import mumsched.model.Faculty;
 import mumsched.model.Student;
 import mumsched.service.StudentService;
+import mumsched.service.FacultyService;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -22,6 +25,9 @@ public class StudentController {
 	
 	@Autowired
 	StudentService studentService;
+	
+	@Autowired
+	FacultyService facultyService;
 
 	//==== 1. Student List Form ====
 	@SuppressWarnings("deprecation")
@@ -47,6 +53,10 @@ public class StudentController {
             model.addAttribute("pageNumbers", pageNumbers);
         }
         
+        //==== Get faculty for dropdown-list ===
+//        List<Faculty> facultyList= facultyService.getAllFaculty();
+//        model.addAttribute("facultyList",facultyList);
+        
         return "student/student";
     }
 
@@ -54,6 +64,10 @@ public class StudentController {
 	@RequestMapping(value={"/student/add"},method=RequestMethod.GET)
     public String AddStudent(@ModelAttribute("newStudent") Student student, Model model) {
 		
+		//==== Get faculty for dropdown-list ===
+        List<Faculty> facultyList= facultyService.getAllFaculty();
+        model.addAttribute("facultyList",facultyList);
+        
 		model.addAttribute("newStudent", student);
  		return "student/addStudent";
     }
@@ -70,6 +84,11 @@ public class StudentController {
 	//=== 4. Edit Form ====
 	@RequestMapping(value = "/student/edit/{id}")
 	public String editEntry(@PathVariable Long id, Model model) {
+		
+//		//==== Get faculty for dropdown-list ===
+        List<Faculty> facultyList= facultyService.getAllFaculty();
+        model.addAttribute("facultyList",facultyList);
+//        
 		Student student = studentService.getStudentById(id);
 		model.addAttribute("student", student);
 		return "student/editStudent";
@@ -81,6 +100,7 @@ public class StudentController {
 		Student entity=studentService.getStudentById(student.getId());
 		entity.setFirstName(student.getFirstName());
 		entity.setLastName(student.getLastName());
+		entity.setGender(student.getGender());
 		entity.setPhone(student.getPhone());
 		entity.setAddress(student.getAddress());
 		entity.setDob(student.getDob());
@@ -88,6 +108,11 @@ public class StudentController {
 		entity.setRegistrationNumber(student.getRegistrationNumber());
 		entity.setEntryDate(student.getEntryDate());
 		entity.setTrack(student.getTrack());
+		
+		//==== update date from drowdown-list ===
+		Faculty faculty=facultyService.getFacultyById(student.getFaculty().getId());
+		entity.setFaculty(faculty);
+		
 		studentService.save(entity);
 		
 		return "redirect:/student";
