@@ -77,6 +77,14 @@
 			    </select>	    
 			</div>
 			 
+			 <div class="form-group">
+				<label>Entry: </label>
+			   <select class="form-control" th:field="*{entry.id}"  id="dropEntry">
+			    <option value="0">select entry</option>
+			    <option th:each="entry : ${entryList}" th:value="${entry.id}" th:text="${entry.entryName}"></option>
+			    </select>	    
+			</div>
+			 
 			<div class="pull-right">
 				<a href="/student" class="btn btn-default">Cancel</a>
 				<button type="submit" class="btn btn-primary" >Save</button>

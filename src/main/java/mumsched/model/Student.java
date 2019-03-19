@@ -39,8 +39,10 @@ public class Student {
 	@OneToOne
 	@JoinColumn(name="advisor_id")
 	private Faculty faculty;
-//	@Column(name="advisor_id")
-//	private Long advisorId;
+
+	@OneToOne
+	@JoinColumn(name="entry_id")
+	private Entry entry;
 	
 	public long getId() {
 		return id;
@@ -116,6 +118,12 @@ public class Student {
 	}
 	public void setFaculty(Faculty faculty) {
 		this.faculty = faculty;
+	}
+	public Entry getEntry() {
+		return entry;
+	}
+	public void setEntry(Entry entry) {
+		this.entry = entry;
 	}
 
 }
