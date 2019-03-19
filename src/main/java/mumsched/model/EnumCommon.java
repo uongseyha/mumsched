@@ -1,6 +1,6 @@
 package mumsched.model;
 
-public class enum_common {
+public class EnumCommon {
 	public enum track{FPP,MPP};
 	public enum gener{MALE,FEMALE};
 	
