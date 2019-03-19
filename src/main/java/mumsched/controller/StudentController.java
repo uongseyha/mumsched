@@ -127,36 +127,4 @@ public class StudentController {
 	}
 	
 	
-	
-//	@GetMapping("/student/{id}")
-//	public String studentDetail(@PathVariable("id") Long id, Model model){
-//		Student student = studentService.getStudentById(id);
-//		model.addAttribute("studentDetail", student);
-//		return "student/studentDetail";
-//	}
-//	
-//	@GetMapping("/student/edit")
-//	public String editUser(Model model, @RequestParam("id") Long id){
-//		Student student = studentService.getStudentById(id);
-//		model.addAttribute("student", student);
-//		model.addAttribute("addStatus", false);
-//		return "student/addStudent";
-//	}
-//		
-//	
-//	@RequestMapping(value={"/student/detail"},method=RequestMethod.GET)
-//    public String studentDetail(@ModelAttribute("newStudent") Student student, Model model) {
-//		
-// 	//GET STUDENT FROM PERSISTENCE	
-// 		model.addAttribute(studentService.getStudentByEmail(student.getEmail()));
-//
-// 		return "student/studentDetail";
-//    }
-//
-//	@GetMapping(value = {"/"}) // = @RequestMapping(value = "/user")
-//	public String userPage(Model model){
-//		
-//		return "/layouts/default";
-//	}
-	
 }

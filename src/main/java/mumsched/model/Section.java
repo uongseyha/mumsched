@@ -1,17 +1,9 @@
 package mumsched.model;
-
-import java.time.LocalDate;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -26,9 +18,9 @@ public class Section {
 	
 	private int maxSeat;
 	
-//	@OneToOne
-//	@JoinColumn(name="faculty_course_id")
-//	private FacultyCourse facultyCourse;
+	@OneToOne
+	@JoinColumn(name="faculty_course_id")
+	private FacultyCourse facultyCourse;
 	
 	@OneToOne
 	@JoinColumn(name="block_id")
@@ -50,13 +42,13 @@ public class Section {
 		this.maxSeat = maxSeat;
 	}
 
-//	public FacultyCourse getFacultyCourse() {
-//		return facultyCourse;
-//	}
-//
-//	public void setFacultyCourse(FacultyCourse facultyCourse) {
-//		this.facultyCourse = facultyCourse;
-//	}
+	public FacultyCourse getFacultyCourse() {
+		return facultyCourse;
+	}
+
+	public void setFacultyCourse(FacultyCourse facultyCourse) {
+		this.facultyCourse = facultyCourse;
+	}
 
 	public Block getBlock() {
 		return block;

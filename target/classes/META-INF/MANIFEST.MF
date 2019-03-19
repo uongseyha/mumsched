@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
+Built-By: ikhbayar
+Build-Jdk: 10.0.2
 Implementation-Title: MUMSched
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: uongs
 Implementation-Vendor-Id: Group4.SBHR
-Build-Jdk: 1.8.0_201
 Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
  ot-starter-parent/MUMSched
 Created-By: Maven Integration for Eclipse

@@ -75,5 +75,7 @@ public class Faculty {
 	public void setDob(LocalDate dob) {
 		this.dob = dob;
 	}
-	
+	public String getFacultyName() {
+		return this.firstName+" "+this.lastName;
+	}
 }
