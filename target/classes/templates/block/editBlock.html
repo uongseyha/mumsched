@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="utf-8">
+<title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">UMS</title>
+<th:block th:replace="fragments/style"></th:block>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+</head>
+<body>
+	<nav class="navbar navbar-default"
+		th:replace="fragments/header :: header"></nav>
+
+	<div class="container" layout:fragment="content">
+		<div class="alert alert-info">
+			<h2>Create Student</h2>
+			<hr>
+			<a class="btn btn-primary" href="/">Return Home</a>
+		</div>
+
+		<form action="#" th:action="@{/editblock-saved}" th:object="${blockEdit}"
+			method="post">
+			<legend>Edit Block</legend>
+
+			<div class="form-group">
+				<label for="blockName">Block Name: </label> <input id="blockName"
+					type="text" th:field="*{blockName}" placeholder="Block name"
+					class="form-control text" />
+			</div>
+			<div class="form-group">
+				<label for="orderNumber">Order Number: </label> <input type="text"
+					th:field="*{orderNumber}" placeholder="Order number"
+					class="form-control text" />
+			</div>
+			<div class="form-group">
+				<label for="startDate">Start Date: </label> <input type="date"
+					th:field="*{startDate}"
+					class="form-control text" />
+			</div>
+
+			<div class="form-group">
+				<label for="endDate">End Date: </label> <input type="date"
+					th:field="*{endDate}" class="form-control date" />
+			</div>
+			<div class="form-group">
+				<label for="FPPNumber">FPP Number: </label> <input id="FPPNumber"
+					type="text" th:field="*{FPPNumber}" placeholder="FPP Number"
+					class="form-control text" />
+			</div>
+			<div class="form-group">
+				<label for="MPPNumber">MPP Number: </label> <input id="MPPNumber"
+					type="text" th:field="*{MPPNumber}" placeholder="MPP Number"
+					class="form-control text" />
+			</div>
+
+
+			<div class="form-group">
+				<input id="btnAdd" type="submit" value="Edit Block"
+					class="btn btn-primary" /> <input type="hidden" th:field="*{id}" />
+			</div>
+		</form>
+	</div>
+
+	<!--Footer-->
+	<footer class="page-footer" th:replace="fragments/footer"></footer>
+	<!--/Footer-->
+
+	<th:block th:replace="fragments/script"></th:block>
+
+	<th:block layout:fragment="myScript">
+
+	</th:block>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="utf-8">
+<title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">UMS</title>
+<th:block th:replace="fragments/style"></th:block>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<!--  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  -->
+</head>
+<body>
+	<nav class="navbar navbar-default"
+		th:replace="fragments/header :: header"></nav>
+
+	<div class="container" layout:fragment="content">
+		<!-- <h1>Render content here!!!</h1> -->
+		<div class="alert alert-info">
+			<h2>Block List</h2>
+			<hr />
+			<a class="btn btn-primary" href="/entry/addform">Create New Block</a>
+
+
+
+		</div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Block Name</th>
+					<th>Order Number</th>
+					<th>Start Date</th>
+					<th>End Date</th>
+					<th>FPP Number</th>
+					<th>MPP Number</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody th:each="block : ${blockList}">
+				<tr>
+					<td th:text="${block.id}"></td>
+					<td th:text="${block.blockName}"></td>
+					<td th:text="${block.orderNumber}"></td>
+					<td th:text="${block.startDate}"></td>
+					<td th:text="${block.endDate}"></td>
+					<td th:text="${block.FPPNumber}"></td>
+					<td th:text="${block.MPPNumber}"></td>
+					<td>
+					<a class="btn btn-warning" th:href="@{'/editblock/' + ${block.id}}">Edit</a>
+					<a class="btn btn-danger" th:href="@{'/delete-block/'+${block.id}}" onclick="return confirm('Are you sure?')">Delete</a>
+					</td>
+				</tr>
+			</tbody>
+
+		</table>
+	</div>
+
+	<!--Footer-->
+	<footer class="page-footer" th:replace="fragments/footer"></footer>
+	<!--/Footer-->
+
+	<th:block th:replace="fragments/script"></th:block>
+
+	<th:block layout:fragment="myScript">
+
+	</th:block>
+</body>
+</html>

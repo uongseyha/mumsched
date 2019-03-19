@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="utf-8">
+<title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">UMS</title>
+<th:block th:replace="fragments/style"></th:block>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<!--  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  -->
+</head>
+<body>
+	<nav class="navbar navbar-default"
+		th:replace="fragments/header :: header"></nav>
+
+	<div class="container" layout:fragment="content">
+		<!-- <h1>Render content here!!!</h1> -->
+		<div class="alert alert-info">
+			<h2>Entry List</h2>
+			<hr />
+			<a class="btn btn-primary" href="/entry/addform">Create New Entry</a>
+
+
+
+		</div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Entry Name</th>
+					<th>Entry Year</th>
+					<th>Entry Month</th>
+					<th>Start Date</th>
+					<th>End Date</th>
+					<th>FPP Number</th>
+					<th>MPP Number</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody th:each="entry : ${entryList}">
+				<tr>
+					<td th:text="${entry.id}"></td>
+					<td th:text="${entry.entryName}"></td>
+					<td th:text="${entry.entryYear}"></td>
+					<td th:text="${entry.entryMonth}"></td>
+					<td th:text="${entry.startDate}"></td>
+					<td th:text="${entry.endDate}"></td>
+					<td th:text="${entry.FPPNumber}"></td>
+					<td th:text="${entry.MPPNumber}"></td>
+					<td>
+						<!-- <form> -->
+						<!-- 	<a class="btn btn-warning">Edit</a> <span> 
+							<input
+								type="hidden" name="id" th:value="${entry.id}" />  -->
+						<!-- 	<input
+								class="btn btn-danger" value="Remove" 
+								onclick="return confirm('Are you sure?')"
+								th:href="@{'/delete-entry/'+${entry.id}}"
+								/> -->
+							<!-- </span> -->
+					<!-- 	</form> -->
+					<a class="btn btn-warning" th:href="@{'/editnewentry/' + ${entry.id}}">Edit</a>
+					<a class="btn btn-danger" th:href="@{'/delete-entry/'+${entry.id}}" onclick="return confirm('Are you sure?')">Delete</a>
+					</td>
+				</tr>
+			</tbody>
+
+		</table>
+	</div>
+
+	<!--Footer-->
+	<footer class="page-footer" th:replace="fragments/footer"></footer>
+	<!--/Footer-->
+
+	<th:block th:replace="fragments/script"></th:block>
+
+	<th:block layout:fragment="myScript">
+
+	</th:block>
+</body>
+</html>
