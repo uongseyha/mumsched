@@ -34,6 +34,7 @@
 					<th>DOB</th>
 					<th>Track</th>
 					<th>Advisor</th>
+					<th>Entry</th>
 					<th>Action</th>
 				</tr>
 			</thead>
@@ -48,6 +49,7 @@
 					<td th:text="${student.dob}"></td>
 					<td th:text="${student.track}"></td>
 					<td th:text="${student.faculty.getFirstName()}"></td>
+					<td th:text="${student.entry.getEntryName()}"></td>
 					<td>
 					<form>
 						<a class="btn btn-warning" th:href="@{'/student/edit/' + ${student.id}}">Edit</a>

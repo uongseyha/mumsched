@@ -23,7 +23,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Entry {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
+	private Long id;
 	
 	private String entryName;
 	private Integer entryYear;
@@ -41,11 +41,11 @@ public class Entry {
 	@Column(name="mpp_number")
 	private Integer MPPNumber;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

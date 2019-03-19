@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import mumsched.model.Entry;
 import mumsched.model.Faculty;
 import mumsched.model.Student;
 import mumsched.service.StudentService;
+import mumsched.service.EntryService;
 import mumsched.service.FacultyService;
 
 import java.util.*;
@@ -28,6 +30,9 @@ public class StudentController {
 	
 	@Autowired
 	FacultyService facultyService;
+
+	@Autowired
+	EntryService entryService;
 
 	//==== 1. Student List Form ====
 	@SuppressWarnings("deprecation")
@@ -52,11 +57,7 @@ public class StudentController {
                 .collect(Collectors.toList());
             model.addAttribute("pageNumbers", pageNumbers);
         }
-        
-        //==== Get faculty for dropdown-list ===
-//        List<Faculty> facultyList= facultyService.getAllFaculty();
-//        model.addAttribute("facultyList",facultyList);
-        
+      
         return "student/student";
     }
 
@@ -66,6 +67,10 @@ public class StudentController {
 		
 		//==== Get faculty for dropdown-list ===
         List<Faculty> facultyList= facultyService.getAllFaculty();
+        model.addAttribute("facultyList",facultyList);
+        
+    	//==== Get entry for dropdown-list ===
+        List<Entry> entryList= entryService.getAllEntry();
         model.addAttribute("facultyList",facultyList);
         
 		model.addAttribute("newStudent", student);
@@ -88,6 +93,10 @@ public class StudentController {
 //		//==== Get faculty for dropdown-list ===
         List<Faculty> facultyList= facultyService.getAllFaculty();
         model.addAttribute("facultyList",facultyList);
+        
+      //==== Get entry for dropdown-list ===
+        List<Entry> entryList= entryService.getAllEntry();
+        model.addAttribute("entryList",entryList);
 //        
 		Student student = studentService.getStudentById(id);
 		model.addAttribute("student", student);
@@ -109,9 +118,14 @@ public class StudentController {
 		entity.setEntryDate(student.getEntryDate());
 		entity.setTrack(student.getTrack());
 		
-		//==== update date from drowdown-list ===
+		//==== update faculty from drowdown-list ===
 		Faculty faculty=facultyService.getFacultyById(student.getFaculty().getId());
 		entity.setFaculty(faculty);
+		
+		//==== update entry from drowdown-list ===
+		Entry entry=entryService.getEntryByEntryID(student.getEntry().getId());
+		entity.setFaculty(faculty);
+		
 		
 		studentService.save(entity);
 		

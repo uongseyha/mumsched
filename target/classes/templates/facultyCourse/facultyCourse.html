@@ -19,42 +19,25 @@
 	<div class="container" layout:fragment="content">
 		<!-- <h1>Render content here!!!</h1> -->
 		<div class="alert alert-info">
-			<h2>Student List</h2><hr/>
-			<a class="btn btn-primary" href="/student/add">Create Student</a>
+			<h2>FacultyCourse List</h2><hr/>
+			<a class="btn btn-primary" href="/facultyCourse/add">Create FacultyCourse</a>
 		</div>
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>FirstName</th>
-					<th>LastName</th>
-					<th>Gender</th>
-					<th>Email</th>
-					<th>Phone</th>
-					<th>Address</th>
-					<th>DOB</th>
-					<th>Track</th>
-					<th>Advisor</th>
-					<th>Entry</th>
-					<th>Action</th>
+					<th>Faculty</th>
+					<th>Course</th>
 				</tr>
 			</thead>
-			<tbody th:each="student : ${studentList}">
+			<tbody th:each="facultyCourse : ${facultyCourseList}">
 				<tr>
-					<td th:text="${student.firstName}"></td>
-					<td th:text="${student.lastName}"></td>
-					<td th:text="${student.gender}"></td>
-					<td th:text="${student.email}"></td>
-					<td th:text="${student.phone}"></td>
-					<td th:text="${student.address}"></td>
-					<td th:text="${student.dob}"></td>
-					<td th:text="${student.track}"></td>
-					<td th:text="${student.faculty.getFirstName()}"></td>
-					<td th:text="${student.entry.getEntryName()}"></td>
+					<td th:text="${facultyCourse.faculty.getFirstName()}"></td>
+					<td th:text="${facultyCourse.course.getCourseTitle()}"></td>
 					<td>
 					<form>
-						<a class="btn btn-warning" th:href="@{'/student/edit/' + ${student.id}}">Edit</a>
+						<a class="btn btn-warning" th:href="@{'/facultyCourse/edit/' + ${facultyCourse.id}}">Edit</a>
 						<span>
-							<a class="btn btn-danger" th:href="@{'/student/delete/' + ${student.id}}" 
+							<a class="btn btn-danger" th:href="@{'/facultyCourse/delete/' + ${facultyCourse.id}}" 
 							onclick="return confirm('Are you sure?')">Remove</a>
 						</span>
 					</form>
@@ -67,10 +50,10 @@
 		<div class="row">
 		<div class="col-sm-6">
 			<nav class="pull-right">
-				<div th:if="${studentList.totalPages > 0}" class="pagination" th:each="pageNumber : ${pageNumbers}">
-				    <a th:href="@{/student(size=${studentList.size}, page=${pageNumber})}"
+				<div th:if="${facultyCourseList.totalPages > 0}" class="pagination" th:each="pageNumber : ${pageNumbers}">
+				    <a th:href="@{/facultyCourse(size=${facultyCourseList.size}, page=${pageNumber})}"
 				        th:text=${pageNumber}
-				        th:class="${pageNumber==studentList.number + 1} ? active"></a>
+				        th:class="${pageNumber==facultyCourseList.number + 1} ? active"></a>
 				</div>
 			</nav>
 		</div>

@@ -13,7 +13,7 @@ import mumsched.model.Faculty;
 public interface FacultyDao  extends  JpaRepository<Faculty, Long>  {
 	
 	@Query("select s from Faculty s where s.id= :id")
-	public Faculty findFacultyById(@Param("id") Long studentId);
+	public Faculty findFacultyById(@Param("id") Long facultyId);
 
 	@Query("select s from Faculty s where s.email= :email")
 	public Faculty findFacultyByEmail(@Param("email") String facultyEmail);
