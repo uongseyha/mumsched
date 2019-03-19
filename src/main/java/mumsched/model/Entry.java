@@ -41,7 +41,7 @@ public class Entry {
 	@Column(name="mpp_number")
 	private Integer MPPNumber;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
