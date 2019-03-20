@@ -14,9 +14,9 @@ import javax.persistence.Table;
 public class Section {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
+	private Long id;
 	
-	private int maxSeat;
+	private Integer maxSeat;
 	
 	@OneToOne
 	@JoinColumn(name="faculty_course_id")
@@ -26,19 +26,19 @@ public class Section {
 	@JoinColumn(name="block_id")
 	private Block block;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public int getMaxSeat() {
+	public Integer getMaxSeat() {
 		return maxSeat;
 	}
 
-	public void setMaxSeat(int maxSeat) {
+	public void setMaxSeat(Integer maxSeat) {
 		this.maxSeat = maxSeat;
 	}
 
@@ -57,6 +57,8 @@ public class Section {
 	public void setBlock(Block block) {
 		this.block = block;
 	}
+
+	
 
 }
 

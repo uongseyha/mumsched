@@ -21,41 +21,47 @@
 
 	<div class="container" layout:fragment="content">
 		<div class="alert alert-info">
-			<h2>Create Section</h2>
+			<h2>Create User As Student</h2>
 			<hr>
 			<a class="btn btn-primary" href="/">Return Home</a>
 		</div>
 
-		<form action="/section/save" th:object="${newSection}" method="post">
+		<form action="/userstudent/save" th:object="${newUser}" method="post">
 
 			<div class="form-group">
-				<label>Max Seat: </label> <input type="text" class="form-control"
-					th:field="*{maxSeat}" placeholder="Max Seat" />
+				<label>User Name: </label> <input type="text" class="form-control"
+					th:field="*{userName}" placeholder="User Name" />
 			</div>
+			
+			<div class="form-group">
+				<label>Password: </label> <input type="text" class="form-control"
+					th:field="*{userPassword}" placeholder="Password" />
+			</div>
+			
 
 			<div class="form-group">
-				<label>Block Name: </label> <select class="form-control"
-					th:field="*{block.id}" id="dropBlock">
-					<option value="0">select block</option>
-					<option th:each="block : ${blockList}"
-						th:value="${block.id}" th:text="${block.getBlockName()}"></option>
+				<label>Role Description: </label> <select class="form-control"
+					th:field="*{role.id}" id="dropRole">
+					<option value="0">select role</option>
+					<option th:each="role : ${roleList}"
+						th:value="${role.id}" th:text="${role.getDescription()}"></option>
 				</select>
 			</div>
 
 
  			<div class="form-group">
-				<label>Course Name: </label> <select class="form-control"
-					th:field="*{facultyCourse.id}" id="dropFacultyCourse">
-					<option value="0">select course</option>
-					<option th:each="facultyCourse : ${facultyCourseList}"
-						th:value="${facultyCourse.id}" th:text="${facultyCourse.course.getCourseTitle()
-						+' /'+facultyCourse.faculty.getFacultyName()+'/'}"></option>
+				<label>Student Full Name: </label> <select class="form-control"
+					th:field="*{student.id}" id="dropStudent">
+					<option value="0">Select student</option>
+					<option th:each="student : ${studentList}"
+						th:value="${student.id}" th:text="${student.getFirstName()
+						+' '+student.getLastName()}"></option>
 				</select>
 			</div>
 
 
 			<div class="pull-right">
-				<a href="/sections" class="btn btn-default">Cancel</a>
+				<a href="/users" class="btn btn-default">Cancel</a>
 				<button type="submit" class="btn btn-primary">Save</button>
 			</div>
 

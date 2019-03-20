@@ -1,6 +1,6 @@
 package mumsched.model;
 
-import java.time.LocalDate;
+
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import mumsched.model.Student;
+
 
 @Entity
 @Table(name="role")
@@ -31,7 +31,7 @@ public class Role{
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getDescription() {
+	public String getDescription(){
 		return description;
 	}
 	public void setDescription(String description) {

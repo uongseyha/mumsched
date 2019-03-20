@@ -22,12 +22,12 @@ import mumsched.model.Faculty;
 public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
+	private Long id;
 	
 	private String userName;
 	private String userPassword;
 	private LocalDate updateDate;
-	private int isActive;
+	private Integer isActive;
 	
 	@OneToOne
 	@JoinColumn(name="role_id")
@@ -44,58 +44,75 @@ public class User {
 	@OneToOne
 	@JoinColumn(name="faculty_id")
 	private Faculty faculty;
-	
-	public long getId() {
+
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+
+	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getUserName() {
 		return userName;
 	}
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+
 	public String getUserPassword() {
 		return userPassword;
 	}
+
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
 	}
+
 	public LocalDate getUpdateDate() {
 		return updateDate;
 	}
+
 	public void setUpdateDate(LocalDate updateDate) {
 		this.updateDate = updateDate;
 	}
-	public int getIsActive() {
+
+	public Integer getIsActive() {
 		return isActive;
 	}
-	public void setIsActive(int isActive) {
+
+	public void setIsActive(Integer isActive) {
 		this.isActive = isActive;
 	}
+
 	public Role getRole() {
 		return role;
 	}
+
 	public void setRole(Role role) {
 		this.role = role;
 	}
+
 	public Admin getAdmin() {
 		return admin;
 	}
+
 	public void setAdmin(Admin admin) {
 		this.admin = admin;
 	}
+
 	public Student getStudent() {
 		return Student;
 	}
+
 	public void setStudent(Student student) {
 		Student = student;
 	}
+
 	public Faculty getFaculty() {
 		return faculty;
 	}
+
 	public void setFaculty(Faculty faculty) {
 		this.faculty = faculty;
 	}
