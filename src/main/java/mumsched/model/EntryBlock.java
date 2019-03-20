@@ -22,7 +22,7 @@ import mumsched.model.Faculty;
 public class EntryBlock {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
+	private Long id;
 	
 	@OneToOne
 	@JoinColumn(name="block_id")
@@ -32,11 +32,11 @@ public class EntryBlock {
 	@JoinColumn(name="entry_id")
 	private Entry entry;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -55,6 +55,7 @@ public class EntryBlock {
 	public void setEntry(Entry entry) {
 		this.entry = entry;
 	}
+
 	
 }
 

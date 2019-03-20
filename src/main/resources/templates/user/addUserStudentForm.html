@@ -28,7 +28,8 @@
 
 		<form action="/userstudent/save" th:object="${newUser}" method="post">
 			
-			<p th:object=${userExist}?:></p>
+			<p th:if="${userExist}" class="error" style="color: red; font-weight: bold; size: 24px"
+			> Username is already existing, choose another username!</p>
 			
 			<div class="form-group">
 				<label>User Name: </label> <input type="text" class="form-control"
@@ -41,18 +42,8 @@
 			</div>
 			
 
-<!-- 			<div class="form-group">
-				<label>Role Description: </label> <select class="form-control"
-					th:field="*{role.id}" id="dropRole">
-					<option value="0">select role</option>
-					<option th:each="role : ${roleList}"
-						th:value="${role.id}" th:text="${role.getDescription()}"></option>
-				</select>
-			</div> -->
-
-
  			<div class="form-group">
-				<label>Student Full Name /First Last/: </label> <select class="form-control"
+				<label>Student Full Name /First and Last/: </label> <select class="form-control"
 					th:field="*{student.id}" id="dropStudent">
 					<option value="0">Select student</option>
 					<option th:each="student : ${studentList}"
@@ -64,7 +55,7 @@
 
 			<div class="pull-right">
 				<a href="/users" class="btn btn-default">Cancel</a>
-				<button type="submit" class="btn btn-primary">Save</button>
+				<button type="submit" class="btn btn-primary" >Save</button>
 				<input type="hidden" th:field="*{id}"/>
 			</div>
 

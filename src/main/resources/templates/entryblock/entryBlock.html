@@ -21,56 +21,49 @@
 	<div class="container" layout:fragment="content">
 		<!-- <h1>Render content here!!!</h1> -->
 		<div class="alert alert-info">
-			<h2>User List</h2>
+			<h2>EntryBlock List</h2>
 			<hr />
-			<a class="btn btn-primary" href="/userstudent/addform">Create New
-				User /Student/</a>
-			<a class="btn btn-primary" href="/userfaculty/addform">Create New
-				User /Faculty/</a>
+			<a class="btn btn-primary" href="/entryblock/addform">Create New EntryBlock</a>
+
 
 
 		</div>
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>ID</th>
-					<th>User Name</th>
-					<th>User Password</th>
-					<th>Role</th>
-					<th>Action</th>
+					<th>Entry</th>
+					<th>Block</th>
 				</tr>
 			</thead>
-			<tbody th:each="user : ${userList}">
+			<tbody th:each="eb : ${entryBlockList}">
 				<tr>
-					<td th:text="${user.id}"></td>
-					<td th:text="${user.userName}"></td>
-					<th th:text="${user.userPassword}"></th>
-					<td th:text="${user.role.getDescription()}"></td>
-					<td><a class="btn btn-warning"
-						th:href="@{'/editnewuser/' + ${user.id}}">Edit</a> <a
-						class="btn btn-danger" th:href="@{'/delete-user/'+${user.id}}"
-						onclick="return confirm('Are you sure?')">Delete</a></td>
+					<td th:text="${eb.getEntry().getEntryName()}"></td>
+					<td th:text="${eb.getBlock().getBlockName()}"></td>
+					
+					<td>
+
+					<a class="btn btn-warning" th:href="@{'/editentryblock/' + ${eb.id}}">Edit</a>
+					<a class="btn btn-danger" th:href="@{'/delete-entryblock/'+${eb.id}}" onclick="return confirm('Are you sure?')">Delete</a>
+					</td>
 				</tr>
 			</tbody>
 
 		</table>
-
+		
 		<div class="row">
-			<div class="col-sm-6">
-				<nav class="pull-right">
-					<div th:if="${userList.totalPages > 0}" class="pagination"
-						th:each="pageNumber : ${pageNumbers}">
-						<a
-							th:href="@{/users(size=${userList.size}, page=${pageNumber})}"
-							th:text=${pageNumber}
-							th:class="${pageNumber==userList.number + 1} ? active"></a>
-					</div>
-				</nav>
-			</div>
+		<div class="col-sm-6">
+			<nav class="pull-right">
+				<div th:if="${entryBlockList.totalPages > 0}" class="pagination" th:each="pageNumber : ${pageNumbers}">
+				    <a th:href="@{/entry-blocks(size=${entryBlockList.size}, page=${pageNumber})}"
+				        th:text=${pageNumber}
+				        th:class="${pageNumber==entryBlockList.number + 1} ? active"></a>
+				</div>
+			</nav>
 		</div>
-
+		</div>
+		
 	</div>
-
+	
 
 	<!--Footer-->
 	<footer class="page-footer" th:replace="fragments/footer"></footer>
