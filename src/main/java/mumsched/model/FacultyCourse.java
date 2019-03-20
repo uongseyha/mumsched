@@ -15,6 +15,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import mumsched.model.Faculty;
 
 @Entity
@@ -22,7 +25,7 @@ import mumsched.model.Faculty;
 public class FacultyCourse {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
+	private Long id;
 	
 	@OneToOne
 	@JoinColumn(name="faculty_id")
@@ -32,11 +35,11 @@ public class FacultyCourse {
 	@JoinColumn(name="course_id")
 	private Course course;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

@@ -71,7 +71,7 @@ public class StudentController {
         
     	//==== Get entry for dropdown-list ===
         List<Entry> entryList= entryService.getAllEntry();
-        model.addAttribute("facultyList",facultyList);
+        model.addAttribute("entryList",entryList);
         
 		model.addAttribute("newStudent", student);
  		return "student/addStudent";
@@ -124,8 +124,7 @@ public class StudentController {
 		
 		//==== update entry from drowdown-list ===
 		Entry entry=entryService.getEntryByEntryID(student.getEntry().getId());
-		entity.setFaculty(faculty);
-		
+		entity.setEntry(entry);
 		
 		studentService.save(entity);
 		
