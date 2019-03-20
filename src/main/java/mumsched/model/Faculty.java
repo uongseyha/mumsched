@@ -1,11 +1,14 @@
 package mumsched.model;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -15,7 +18,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Faculty {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
+	private Long id;
 	
 	private String firstName;
 	private String lastName;
@@ -27,10 +30,10 @@ public class Faculty {
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate dob;
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getFirstName() {
