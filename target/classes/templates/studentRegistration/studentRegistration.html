@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="utf-8">
+<title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">UMS</title>
+<th:block th:replace="fragments/style"></th:block>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<!--  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  -->
+</head>
+<body>
+	<nav class="navbar navbar-default"
+		th:replace="fragments/header :: header"></nav>
+
+	<div class="container" layout:fragment="content">
+		<!-- <h1>Render content here!!!</h1> -->
+		<div class="alert alert-info">
+			<h2>StudentRegistration List</h2>
+			<hr />
+			<a class="btn btn-primary" href="/studentRegistration/add">Create New StudentRegistration</a>
+
+
+
+		</div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Student Name</th>
+					<th>Block</th>
+					<th>Course</th>
+					<th>Faculty</th>
+					<th>Status</th>
+					<!-- <th>Action</th> -->
+				</tr>
+			</thead>
+			<tbody th:each="studentRegistration : ${studentRegistrationList}">
+				<tr>
+					<td th:text="${studentRegistration.student.getName()}"></td>
+					<td th:text="${studentRegistration.section.block.getBlockName()}"></td>
+					<th th:text="${studentRegistration.section.facultyCourse.course.getCourseTitle()}"></th>
+					<td th:text="${studentRegistration.section.facultyCourse.faculty.getFacultyName()}"></td>
+					<td th:text="${studentRegistration.status.getDescription()}"></td>
+					
+					 
+					<td>
+						<a class="btn btn-warning" th:href="@{'/studentRegistration/edit/' + ${studentRegistration.id}}">Edit</a>
+						<a class="btn btn-danger" th:href="@{'/studentRegistration/delete/' + ${studentRegistration.id}}" 
+							onclick="return confirm('Are you sure?')">Remove</a>
+					</td>
+					
+				</tr>
+			</tbody>
+
+		</table>
+		
+		<div class="row">
+		<div class="col-sm-6">
+			<nav class="pull-right">
+				<div th:if="${studentRegistrationList.totalPages > 0}" class="pagination" th:each="pageNumber : ${pageNumbers}">
+				    <a th:href="@{/studentRegistrations(size=${studentRegistrationList.size}, page=${pageNumber})}"
+				        th:text=${pageNumber}
+				        th:class="${pageNumber==studentRegistrationList.number + 1} ? active"></a>
+				</div>
+			</nav>
+		</div>
+		</div>
+		
+	</div>
+	
+
+	<!--Footer-->
+	<footer class="page-footer" th:replace="fragments/footer"></footer>
+	<!--/Footer-->
+
+	<th:block th:replace="fragments/script"></th:block>
+
+	<th:block layout:fragment="myScript">
+
+	</th:block>
+</body>
+</html>

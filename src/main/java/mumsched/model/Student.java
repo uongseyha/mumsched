@@ -125,5 +125,9 @@ public class Student {
 	public void setEntry(Entry entry) {
 		this.entry = entry;
 	}
+	
+	public String getName() {
+		return this.firstName + " " + this.lastName;
+	}
 
 }

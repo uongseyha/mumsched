@@ -33,6 +33,7 @@ import mumsched.service.SectionService;
 public class SectionController {
 	@Autowired
 	SectionService sectionService;
+	
 	@Autowired
 	FacultyCourseService facultyCourseService;
 

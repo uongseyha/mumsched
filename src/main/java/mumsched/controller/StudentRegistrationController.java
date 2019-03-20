@@ -11,8 +11,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import mumsched.model.Course;
+import mumsched.model.Faculty;
+import mumsched.model.Section;
+import mumsched.model.Student;
 import mumsched.model.StudentRegistration;
+import mumsched.model.StudentRegistrationStatus;
+import mumsched.service.BlockService;
+import mumsched.service.FacultyCourseService;
+import mumsched.service.SectionService;
 import mumsched.service.StudentRegistrationService;
+import mumsched.service.StudentRegistrationStatusService;
+import mumsched.service.StudentService;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -22,7 +33,22 @@ public class StudentRegistrationController {
 	
 	@Autowired
 	StudentRegistrationService studentRegistrationService;
+	
+	@Autowired
+	SectionService sectionService;
+	
+	@Autowired
+	FacultyCourseService facultyCourseService;
 
+	@Autowired
+	BlockService blockService;
+	
+	@Autowired
+	StudentService studentService;
+	
+	@Autowired
+	StudentRegistrationStatusService statusService;
+	
 	//==== 1. StudentRegistration List Form ====
 	@SuppressWarnings("deprecation")
 	@RequestMapping(value={"/studentRegistration"})
@@ -51,6 +77,14 @@ public class StudentRegistrationController {
 	@RequestMapping(value={"/studentRegistration/add"},method=RequestMethod.GET)
     public String AddStudentRegistration(@ModelAttribute("newStudentRegistration") StudentRegistration studentRegistration, Model model) {
 		
+//		List<Student> studentList=studentService.getStudentListById(1);
+//		model.addAttribute("studentList", studentList);
+		model.addAttribute("studentList",studentService.getAllStudent());
+		
+		model.addAttribute("sectionList", sectionService.getAllSections());
+		
+		model.addAttribute("statusList", statusService.getAll());
+		
 		model.addAttribute("newStudentRegistration", studentRegistration);
  		return "studentRegistration/addStudentRegistration";
     }
@@ -67,6 +101,11 @@ public class StudentRegistrationController {
 	//=== 4. Edit Form ====
 	@RequestMapping(value = "/studentRegistration/edit/{id}")
 	public String editEntry(@PathVariable Long id, Model model) {
+		
+		model.addAttribute("studentList", studentService.getAllStudent());
+		model.addAttribute("sectionList", sectionService.getAllSections());
+		model.addAttribute("statusList", statusService.getAll());
+		
 		StudentRegistration studentRegistration = studentRegistrationService.getStudentRegistrationById(id);
 		model.addAttribute("studentRegistration", studentRegistration);
 		return "studentRegistration/editStudentRegistration";
@@ -76,13 +115,20 @@ public class StudentRegistrationController {
 	@RequestMapping(value = "/studentRegistration/edit/save", method = RequestMethod.POST)
 	public String SaveEditStudentRegistration(@ModelAttribute("studentRegistration") StudentRegistration studentRegistration) {
 		StudentRegistration entity=studentRegistrationService.getStudentRegistrationById(studentRegistration.getId());
-//		entity.setFirstName(studentRegistration.getFirstName());
-//		entity.setLastName(studentRegistration.getLastName());
-//		entity.setPhone(studentRegistration.getPhone());
-//		entity.setAddress(studentRegistration.getAddress());
-//		entity.setDob(studentRegistration.getDob());
-//		entity.setEmail(studentRegistration.getEmail());
-//		entity.setGender(studentRegistration.getGender());
+		//entity.setFirstName(studentRegistration.getFirstName());
+		
+		//==== update data from drowdown-list ===
+		Student student=studentService.getStudentById(studentRegistration.getStudent().getId());
+		entity.setStudent(student);
+		
+		//==== update data from drowdown-list ===
+		Section section=sectionService.getSectionBySectionId(studentRegistration.getSection().getId());
+		entity.setSection(section);
+		
+		//==== update data from drowdown-list ===
+		StudentRegistrationStatus status=statusService.getStudentRegistrationStatusById(studentRegistration.getStatus().getId());
+		entity.setStatus(status);
+		
 		studentRegistrationService.save(entity);
 		
 		return "redirect:/studentRegistration";

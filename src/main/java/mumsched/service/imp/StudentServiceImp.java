@@ -39,6 +39,12 @@ public class StudentServiceImp implements StudentService  {
 	@Override
 	public List<Student> getAllStudent(){
 		return studentDAO.findAll();
+		//return studentDAO.findAllById(ids)
+	}
+	
+	@Override
+	public List<Student> getStudentListById(int id){
+		return studentDAO.findAllById(id);
 	}
 	
 	@Override
