@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import mumsched.dao.StudentDao;
 import mumsched.model.Student;
@@ -38,8 +40,8 @@ public class StudentServiceImp implements StudentService  {
 	
 	@Override
 	public List<Student> getAllStudent(){
-		return studentDAO.findAll();
-		//return studentDAO.findAllById(ids)
+		Sort sort = new Sort(new Sort.Order(Direction.DESC, "firstName"));
+		return studentDAO.findAll(sort);
 	}
 	
 	@Override

@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import mumsched.dao.FacultyCourseDao;
 import mumsched.model.FacultyCourse;
@@ -34,7 +36,8 @@ public class FacultyCourseServiceImp implements FacultyCourseService  {
 	
 	@Override
 	public List<FacultyCourse> getAllFacultyCourse(){
-		return facultyCourseDAO.findAll();
+		Sort sort = new Sort(new Sort.Order(Direction.ASC, "faculty"));
+		return facultyCourseDAO.findAll(sort);
 	}
 	
 	@Override

@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import mumsched.dao.EntryBlockDao;
@@ -36,6 +38,7 @@ public class EntryBlockServiceImp implements EntryBlockService {
 	@Override
 	public List<EntryBlock> getAllEntryBlock() {
 		// TODO Auto-generated method stub
+		Sort sort = new Sort(new Sort.Order(Direction.ASC, "entry"));
 		return entryBlockDao.findAll();
 	}
 

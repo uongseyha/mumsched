@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import mumsched.dao.CourseDao;
 import mumsched.model.Course;
@@ -33,7 +35,8 @@ public class CourseServiceImp implements CourseService  {
 	
 	@Override
 	public List<Course> getAllCourse(){
-		return courseDAO.findAll();
+		Sort sort = new Sort(new Sort.Order(Direction.ASC, "courseTitle"));
+		return courseDAO.findAll(sort);
 	}
 	
 	@Override
@@ -42,7 +45,8 @@ public class CourseServiceImp implements CourseService  {
 	}
 	 
     public Page<Course> findPaginated(Pageable pageable) {
-    	List<Course> course = courseDAO.findAll();
+    	Sort sort = new Sort(new Sort.Order(Direction.ASC, "courseTitle"));
+    	List<Course> course = courseDAO.findAll(sort);
     	int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;

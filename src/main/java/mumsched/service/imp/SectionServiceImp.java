@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import mumsched.dao.SectionDao;
@@ -40,7 +42,9 @@ public class SectionServiceImp implements SectionService {
 	@Override
 	public List<Section> getAllSections() {
 		// TODO Auto-generated method stub
-		return sectionDao.getAllSections();
+		Sort sort = new Sort(new Sort.Order(Direction.ASC, "block"));
+		return sectionDao.findAll(sort);
+		//return sectionDao.getAllSections();
 	}
 
 	@Override

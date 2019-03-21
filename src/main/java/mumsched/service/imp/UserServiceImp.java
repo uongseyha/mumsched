@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import mumsched.dao.UserDao;
@@ -38,7 +40,8 @@ public class UserServiceImp implements UserService {
 
 	@Override
 	public List<User> getUsers() {
-		return userDao.findAll();
+		Sort sort = new Sort(new Sort.Order(Direction.ASC, "userName"));
+		return userDao.findAll(sort);
 	}
 
 	@Override

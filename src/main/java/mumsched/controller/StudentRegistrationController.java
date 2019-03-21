@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import mumsched.model.Block;
 import mumsched.model.Course;
 import mumsched.model.Faculty;
 import mumsched.model.Section;
@@ -24,6 +25,7 @@ import mumsched.service.StudentRegistrationService;
 import mumsched.service.StudentRegistrationStatusService;
 import mumsched.service.StudentService;
 
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -77,12 +79,23 @@ public class StudentRegistrationController {
 	@RequestMapping(value={"/studentRegistration/add"},method=RequestMethod.GET)
     public String AddStudentRegistration(@ModelAttribute("newStudentRegistration") StudentRegistration studentRegistration, Model model) {
 		
-//		List<Student> studentList=studentService.getStudentListById(1);
-//		model.addAttribute("studentList", studentList);
+		//==== get Student =====
 		model.addAttribute("studentList",studentService.getAllStudent());
 		
-		model.addAttribute("sectionList", sectionService.getAllSections());
+		//==== get section =====
+		List<StudentRegistration> listStuReg=studentRegistrationService.getAllStudentRegistration();
+		List<Block> listS=listStuReg.stream()
+				.map(x -> x.getSection().getBlock())
+				.collect(Collectors.toList());
+
+		List<Section> listSection=sectionService.getAllSections();
+		List<Section> sectionList=listSection.stream()
+				.filter(x -> !listS.contains(x.getBlock()))
+				.collect(Collectors.toList());
+		model.addAttribute("sectionList", sectionList);
+		//model.addAttribute("sectionList", sectionService.getAllSections());
 		
+		//==== get Status =====
 		model.addAttribute("statusList", statusService.getAll());
 		
 		model.addAttribute("newStudentRegistration", studentRegistration);
@@ -129,6 +142,7 @@ public class StudentRegistrationController {
 		StudentRegistrationStatus status=statusService.getStudentRegistrationStatusById(studentRegistration.getStatus().getId());
 		entity.setStatus(status);
 		
+		entity.setUpdateDate(LocalDate.now());
 		studentRegistrationService.save(entity);
 		
 		return "redirect:/studentRegistration";
@@ -141,5 +155,8 @@ public class StudentRegistrationController {
 
 		return "redirect:/studentRegistration";
 	}
+	
+	//==== 7. Confirm ===
+	
 	
 }

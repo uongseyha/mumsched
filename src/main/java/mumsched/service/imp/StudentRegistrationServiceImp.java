@@ -10,8 +10,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+
+import mumsched.dao.SectionDao;
 import mumsched.dao.StudentRegistrationDao;
+import mumsched.model.Section;
 import mumsched.model.StudentRegistration;
 import mumsched.service.StudentRegistrationService;
 
@@ -21,6 +26,9 @@ public class StudentRegistrationServiceImp implements StudentRegistrationService
 	//@Autowired (required=false)
 	@Autowired
 	StudentRegistrationDao studentRegistrationDAO;
+	
+	@Autowired
+	SectionDao sectionDAO;
 	
 	public void save(StudentRegistration studentRegistration){
 		studentRegistrationDAO.save(studentRegistration);
@@ -34,7 +42,8 @@ public class StudentRegistrationServiceImp implements StudentRegistrationService
 	
 	@Override
 	public List<StudentRegistration> getAllStudentRegistration(){
-		return studentRegistrationDAO.findAll();
+		Sort sort = new Sort(new Sort.Order(Direction.ASC, "student"));
+		return studentRegistrationDAO.findAll(sort);
 	}
 	
 	@Override
@@ -47,7 +56,7 @@ public class StudentRegistrationServiceImp implements StudentRegistrationService
     	
 //    	List<StudentRegistration> listReg = studentRegistrationDAO.findAll();
 //    	List<StudentRegistration> studentRegistration=listReg.stream().filter(x -> x.getStudent().getId()==1).collect(Collectors.toList());
-
+ 
     	int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;

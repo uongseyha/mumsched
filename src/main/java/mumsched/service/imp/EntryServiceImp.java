@@ -4,6 +4,8 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import mumsched.dao.EntryDao;
@@ -39,7 +41,8 @@ public class EntryServiceImp implements EntryService {
 	@Override
 	public List<Entry> getAllEntry() {
 		// TODO Auto-generated method stub
-		return entryDao.getAllEntry();
+		Sort sort = new Sort(new Sort.Order(Direction.ASC, "entryName"));
+		return entryDao.findAll(sort);
 	}
 
 	@Override

@@ -3,6 +3,8 @@ package mumsched.service.imp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import mumsched.dao.RoleDao;
@@ -21,7 +23,8 @@ public class RoleServiceImp implements RoleService {
 
 	@Override
 	public List<Role> getAllRole() {
-		return roleDao.getAllRole();
+		Sort sort = new Sort(new Sort.Order(Direction.ASC, "description"));
+		return roleDao.findAll(sort);
 	}
 
 	@Override

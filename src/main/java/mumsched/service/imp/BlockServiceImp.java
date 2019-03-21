@@ -3,6 +3,8 @@ package mumsched.service.imp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import mumsched.dao.BlockDao;
 import mumsched.model.Block;
@@ -35,7 +37,8 @@ public class BlockServiceImp implements BlockService {
 	@Override
 	public List<Block> getAllBlocks() {
 		// TODO Auto-generated method stub
-		return blockDao.findAll();
+		Sort sort = new Sort(new Sort.Order(Direction.ASC, "orderNumber"));
+		return blockDao.findAll(sort);
 	}
 
 	@Override
